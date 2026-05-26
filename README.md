@@ -1,6 +1,8 @@
 # RocketLeague-PPO-Bot
- 
-A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak), with a custom reward system designed to produce competitive 1v1 gameplay.
+
+A Rocket League reinforcement learning agent trained from scratch using Proximal Policy Optimization (PPO) in a fully custom C++ training environment. The system uses large-scale self-play, distributed simulation, and a heavily engineered multi-objective reward function to learn competitive 1v1 gameplay.
+
+After ~10 billion training timesteps across 256 parallel simulations, the agent achieved gameplay performance outperforming approximately 80% of ranked Rocket League players.
  
 ## Training Progression
 
@@ -16,7 +18,7 @@ A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO
  
 The bot learns to play Rocket League through self-play, receiving rewards for ball control, aerial maneuvers, boost management, and scoring goals. Training runs entirely in C++ for maximum performance, simulating hundreds of games in parallel on CPU or GPU.
  
-After approximately 10 billion timesteps the bot reliably performs at a skill level outperforming approximately 80% of ranked Rocket League players.
+After approximately 10 billion timesteps, the agent consistently demonstrated gameplay performance exceeding roughly 80% of ranked Rocket League players in 1v1 play.
  
 ## Architecture
  
@@ -81,6 +83,15 @@ This mix ensures the bot learns both structured play and recovery from chaotic s
 - Boost level
 - Touch height (aerial quality)
 - Goal speed
+
+## Technical Challenges
+
+- Stabilizing PPO training over multi-billion timestep runs
+- Preventing reward exploitation and degenerate strategies
+- Balancing sparse rewards (goals) with dense shaping rewards
+- Maintaining simulation throughput across 256 parallel environments
+- Encouraging advanced mechanics such as aerials and wavedashes through reward shaping
+
 ## Dependencies
  
 - [RLGymCPP](https://github.com/ZealanL/RLGymPPO_CPP) - Rocket League gym environment in C++
