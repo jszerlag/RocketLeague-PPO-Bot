@@ -6,7 +6,7 @@ A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO
 
 | 2 Billion Steps | 5 Billion Steps | 10 Billion Steps |
 |----------------|----------------|-----------------|
-| ![2B](clips/2b.gif) | ![5B](clips/5b.gif) | ![10B](clips/10b.gif) |
+| ![2B](Clips/2b.gif) | ![5B](Clips/5b.gif) | ![10B](Clips/10b.gif) |
 | Early movement, chasing ball | Scoring goals, boost management | Aerials, demos, advanced mechanics |
  
 ## Overview
