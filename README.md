@@ -10,7 +10,7 @@ A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO
 | Early movement, chasing ball | Scoring goals, boost management | Aerials, demos, advanced mechanics |
 
 > **Note:** All clips are from the training environment where the bot plays against 
-> itself (self-play).
+> itself.
  
 ## Overview
  
