@@ -1,2 +1,95 @@
 # RocketLeague-PPO-Bot
-Rewards and bot structure for my Reinforcement Learning Rocket League Bot
+ 
+A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [RLGymCPP](https://github.com/ZealanL/RLGymCPP) and [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP), with a fully custom reward system designed to produce competitive 1v1 gameplay.
+ 
+## Demo
+ 
+> *(Add gameplay clips or GIFs here)*
+ 
+## Overview
+ 
+The bot learns to play Rocket League through self-play, receiving rewards for ball control, aerial maneuvers, boost management, and scoring goals. Training runs entirely in C++ for maximum performance, simulating hundreds of games in parallel on CPU.
+ 
+After approximately 100 million timesteps the bot reliably scores goals, manages boost, and attempts aerial hits.
+ 
+## Architecture
+ 
+| Component | Details |
+|-----------|---------|
+| Algorithm | PPO (Proximal Policy Optimization) |
+| Network | Shared head + policy/critic branches, 3x256 layers, ReLU, LayerNorm |
+| Optimizer | Adam (`lr = 1e-4`) |
+| Observation | `AdvancedObs` — full game state per player |
+| Action space | `DefaultAction` — discrete action parser |
+| Simulation | RocketSim physics engine |
+| Parallelism | 256 simultaneous games |
+ 
+## Reward System
+ 
+Rewards are weighted and combined at each timestep to shape behavior across multiple skill dimensions:
+ 
+| Reward | Weight | Purpose |
+|--------|--------|---------|
+| `GoalReward` | 150 | Primary objective — score, penalize conceding |
+| `DemoReward` (zero-sum) | 80 | Reward demolishing opponents |
+| `AerialTouchReward` | 35 | Encourage aerial ball contacts |
+| `TouchAccelReward` | 20 | Reward accelerating the ball on touch |
+| `BumpReward` (zero-sum) | 20 | Reward bumping opponents |
+| `PickupBoostReward` | 15 | Reward collecting boost |
+| `VelocityBallToGoalReward` (zero-sum) | 2.5 | Push ball toward opponent goal |
+| `SpeedReward` | 0.4 | General car speed |
+| `SaveBoostReward` | 0.2 | Penalize wasting boost |
+| `FaceBallReward` | 0.25 | Keep car oriented toward ball |
+| `VelocityPlayerToBallReward` | 0.25 | Drive toward the ball |
+| `AirReward` | 0.25 | Encourage time in the air |
+| `WavedashReward` | 10 | Reward wavedash mechanics |
+ 
+Zero-sum rewards are computed relative to the opposing team, preventing reward hacking through passive play.
+ 
+## Training Configuration
+ 
+```cpp
+cfg.numGames = 256;          // Parallel game instances
+cfg.tickSkip = 8;            // Physics ticks per action
+cfg.ppo.tsPerItr = 100'000;  // Timesteps per PPO update
+cfg.ppo.epochs = 2;          // PPO epochs per iteration
+cfg.ppo.entropyScale = 0.035f;
+cfg.ppo.gaeGamma = 0.99;     // Reward decay
+cfg.tsPerSave = 50'000'000;  // Checkpoint every 50M steps
+```
+ 
+## State Initialization
+ 
+Each episode starts in one of two states, sampled randomly:
+ 
+- **Kickoff** (60%) — standard kickoff positions
+- **Random** (40%) — random car and ball positions, velocities, and rotations
+This mix ensures the bot learns both structured play and recovery from chaotic situations.
+ 
+## Metrics Tracked
+ 
+- In-air ratio
+- Ball touch ratio
+- Demo ratio
+- Average car speed & speed towards ball
+- Boost level
+- Touch height (aerial quality)
+- Goal speed
+## Dependencies
+ 
+- [RLGymCPP](https://github.com/ZealanL/RLGymCPP) — Rocket League gym environment in C++
+- [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP) — PPO learner framework
+- [RocketSim](https://github.com/ZealanL/RocketSim) — Fast Rocket League physics simulation
+- Collision meshes extracted from Rocket League (not included)
+## Setup
+ 
+1. Install RocketSim, RLGymCPP, and GigaLearnCPP
+2. Extract Rocket League collision meshes and update the path in `ExampleMain.cpp`:
+```cpp
+RocketSim::Init("path/to/collision_meshes");
+```
+3. Build with CMake and run:
+```bash
+./RLBot           # Train
+./RLBot --render  # Train with rendering enabled
+```
