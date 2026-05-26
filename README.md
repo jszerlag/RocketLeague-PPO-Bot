@@ -2,9 +2,12 @@
  
 A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak), with a custom reward system designed to produce competitive 1v1 gameplay.
  
-## Demo
- 
-> *(Add gameplay clips or GIFs here)*
+## Training Progression
+
+| 2 Billion Steps | 5 Billion Steps | 10 Billion Steps |
+|----------------|----------------|-----------------|
+| ![2B](clips/2b.gif) | ![5B](clips/5b.gif) | ![10B](clips/10b.gif) |
+| Early movement, chasing ball | Scoring goals, boost management | Aerials, demos, advanced mechanics |
  
 ## Overview
  
