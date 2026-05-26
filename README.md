@@ -1,6 +1,6 @@
 # RocketLeague-PPO-Bot
  
-A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [RLGymCPP](https://github.com/ZealanL/RLGymCPP) and [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP), with a fully custom reward system designed to produce competitive 1v1 gameplay.
+A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [RLGymCPP](https://github.com/ZealanL/RLGymCPP) and [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak), with a custom reward system designed to produce competitive 1v1 gameplay.
  
 ## Demo
  
@@ -8,9 +8,9 @@ A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO
  
 ## Overview
  
-The bot learns to play Rocket League through self-play, receiving rewards for ball control, aerial maneuvers, boost management, and scoring goals. Training runs entirely in C++ for maximum performance, simulating hundreds of games in parallel on CPU.
+The bot learns to play Rocket League through self-play, receiving rewards for ball control, aerial maneuvers, boost management, and scoring goals. Training runs entirely in C++ for maximum performance, simulating hundreds of games in parallel on CPU or GPU.
  
-After approximately 100 million timesteps the bot reliably scores goals, manages boost, and attempts aerial hits.
+After approximately 10 billion timesteps the bot reliably performs at a skill level outperforming approximately 80% of ranked Rocket League players.
  
 ## Architecture
  
@@ -62,8 +62,8 @@ cfg.tsPerSave = 50'000'000;  // Checkpoint every 50M steps
  
 Each episode starts in one of two states, sampled randomly:
  
-- **Kickoff** (60%) — standard kickoff positions
-- **Random** (40%) — random car and ball positions, velocities, and rotations
+- **Kickoff** (60%) - standard kickoff positions
+- **Random** (40%) - random car and ball positions, velocities, and rotations
 This mix ensures the bot learns both structured play and recovery from chaotic situations.
  
 ## Metrics Tracked
@@ -77,9 +77,9 @@ This mix ensures the bot learns both structured play and recovery from chaotic s
 - Goal speed
 ## Dependencies
  
-- [RLGymCPP](https://github.com/ZealanL/RLGymCPP) — Rocket League gym environment in C++
-- [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP) — PPO learner framework
-- [RocketSim](https://github.com/ZealanL/RocketSim) — Fast Rocket League physics simulation
+- [RLGymCPP](https://github.com/ZealanL/RLGymCPP) - Rocket League gym environment in C++
+- [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP) - PPO learner framework
+- [RocketSim](https://github.com/ZealanL/RocketSim) - Fast Rocket League physics simulation
 - Collision meshes extracted from Rocket League (not included)
 ## Setup
  
