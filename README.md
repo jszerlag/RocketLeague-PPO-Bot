@@ -1,6 +1,6 @@
 # RocketLeague-PPO-Bot
  
-A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [RLGymCPP](https://github.com/ZealanL/RLGymCPP) and [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak), with a custom reward system designed to produce competitive 1v1 gameplay.
+A Rocket League bot trained from scratch using Proximal Policy Optimization (PPO) and a custom C++ reinforcement learning environment. Built on top of [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak), with a custom reward system designed to produce competitive 1v1 gameplay.
  
 ## Demo
  
@@ -77,8 +77,8 @@ This mix ensures the bot learns both structured play and recovery from chaotic s
 - Goal speed
 ## Dependencies
  
-- [RLGymCPP](https://github.com/ZealanL/RLGymCPP) - Rocket League gym environment in C++
-- [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP) - PPO learner framework
+- [RLGymCPP](https://github.com/ZealanL/RLGymPPO_CPP) - Rocket League gym environment in C++
+- [GigaLearnCPP](https://github.com/ZealanL/GigaLearnCPP-Leak) - PPO learner framework
 - [RocketSim](https://github.com/ZealanL/RocketSim) - Fast Rocket League physics simulation
 - Collision meshes extracted from Rocket League (not included)
 ## Setup
