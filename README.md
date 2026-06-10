@@ -1,6 +1,6 @@
 # RocketLeague-PPO-Bot
 
-A Rocket League reinforcement learning agent trained from scratch using Proximal Policy Optimization (PPO) in a fully custom C++ training environment. The system uses large-scale self-play, distributed simulation, and a heavily engineered multi-objective reward function to learn competitive 1v1 gameplay.
+A Rocket League reinforcement learning agent trained from scratch using Proximal Policy Optimization (PPO) in a custom C++ training environment. The system uses large-scale self-play, distributed simulation, and a heavily engineered multi-objective reward function to learn competitive 1v1 gameplay.
 
 After ~10 billion training timesteps across 256 parallel simulations, the agent achieved gameplay performance outperforming approximately 80% of ranked Rocket League players.
  
